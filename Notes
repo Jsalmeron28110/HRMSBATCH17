@@ -1,0 +1,273 @@
+class 1 -
+Cucumber -
+
+Java - programming language
+Selenium - automate web based application
+
+no reports in selenium
+no common ground for all the team members
+
+no main method for execution - no control of execution
+
+smoke
+regression
+
+framework - this is the final outcome of the complete concepts
+
+cucumber as a tool
+cucumber/BDD/gherkin as a framework
+
+Create a new project
+File -> new -> Project -> Maven -> groupId -> artifactId -> click create
+
+group id - it means the name of the organisation
+artifact id - it means the name of the project
+
+
+we created maven project -
+pom.xml file is the configuration file where we will add all the dependencies
+pom.xml is the file we will use to execute our code in the end of the framework
+pom.xml is the file we will use to generate the report
+
+in our project we get src folder in which we get main and test
+
+main - the code we write to develop the application, we write it in main
+test - the code we write to test the application, we write it in test
+
+we delete main folder because we will work with test
+
+in test folder -
+we get java - to keep all the java stuff
+we get resources - to keep all the non java stuff
+
+java
+selenium
+cucumber
+apache poi
+commons
+
+Class 2 -
+Recap -
+in selenium, we dont have reporting option, no execution control, no standard format
+of writing the code. To achieve all these, we need to integrate our scripts with
+additional tools and structure (framework)
+
+cucumber is a tool which allows us to write scenarios in plain english text called
+gherkin which follows behavioral driven development.
+
+we created maven project
+we have java, selenium, cucumber, apache poi
+
+User story - 12345 - Valid admin login
+
+Scenario -
+
+Given - pre condition
+when - actions
+Then - expected result
+And - supporting tag
+
+Given user is navigated to HRMS application
+When user enters admin username and password
+And user clicks on login button
+Then admin user is successfully logged in
+
+in cucumber, every single test case will be considered as a scenario
+
+we write scenario in cucumber in a special file called feature file having the
+extension .feature
+
+rules for writing the scenario -
+once step def is created, don't add any space or . or any other character into it
+don't create duplicate step, you will get an exception (duplicate step exception)
+
+cucumber highly encourages code reusability
+
+User story - Employee search
+
+Scenario - search employee by id
+
+    Given user is navigated to HRMS application
+    When user enters admin username and password
+    And user clicks on login button
+    Then user is successfully logged in
+    When user clicks on PIM option
+    And user clicks on Employee List Option
+    When user enters employee id
+    And user clicks on search button
+    Then user should be able to see employee details
+
+class 3 -
+
+for feature file, we need step definitions to execute the code.
+
+we need one point of execution.
+
+as per the standards, for employeesearch feature, we need employeesearch steps class
+to write all the steps definition
+
+we cannot write duplicate steps in step definitions classes
+
+runner class - we execute all the scenarios, some of the scenarios or one of the scenarios
+based on the requirement
+
+in runners package, we will create all the test runner classes
+features
+glue
+dry run
+tags
+
+there is a need through which I can execute one scenario among multiple
+same tag name must be provided in scenario as it is in runner class
+sprint 5
+sprint 1,2,3,4 - 8, 5, 7, 9
+we use 'or' keyword to execute scenarios from either conditions
+if one condition is true, it will execute the scenario
+
+we use 'and' keyword to execute the scenarios when both conditions must be true
+
+utils folder - to create common methods class so that we can use all the commmon
+functions from this class
+
+Class 4 -
+
+recap -
+test runner is a class through which we can execute all the test cases and can also control
+the flow of execution.
+
+options we add in runner class
+features - path to the feature directory
+glue - it provides the path of step definitions classes
+dry run - to generate the missing step def, we set dry run to true.
+tags - in order to execute scenarios in a group, we execute them with tags.
+we use 'and' and 'or' keyword to execute based on the conditions.
+we must put , in between 2 cucumber options in runner class.
+
+as per the standards/characteristics of framework
+code reusability must be there
+it should be easily expandable
+it should be easily understandable
+new person should be able to work with it with minimal guidance
+things which are used multiple places cannot be hard coded
+
+click -
+send keys -
+
+cross browser testing - when your scripts execute against multiple browser, it is cross browser testing
+
+we need constants class to pass the path of all the constant files such as config, testdata etc.
+
+background - for all the common steps of the scenarios, we can write them here.
+till the time flow is same, we can take the steps. Once the flow changed, we can't take steps
+
+it is limited to one feature file. It means, for different feature files, background will be
+different.
+
+class 5 -
+recap -
+
+how to pass the data from config file -
+we wrote some of the common methods in common methods class
+
+background - common steps from all the scenarios we can take and put it under background
+**only till the flow is same**
+
+background is applicable for one feature file.
+
+order of execution - background execute -> scenario execute
+
+Hooks - hooks are used to write the pre condition and post condition of the project
+we need to create hooks class under steps package
+when we execute the code, hooks class will execute pre condition first and then all the
+test cases will be executed and then post condition will execute at last
+
+DONT FORGET TO COMMENT STEPS FROM ALL FEATURE FILES FOR PRE AND POST CONdITION
+
+in the framework, we cannot pass any hard coded data. cucumber allows us to perform
+data driven testing
+
+data driven testing - when one scenario executed against multiple set of data, we call it
+data driven testing approach
+
+scenario vs scenario outline -
+scenario execute against one set of data from the feature file
+scenario outline has examples table where we keep multiple sets of data and it will
+execute based on the number of data sets
+
+order of execution -  hooks -> background -> scenario
+
+Page object model - it is a design pattern which says that we create separate
+individual class as per the screens of the application. such as for login screen
+we will create loginpage class, for dashboard screen we will create dashboardpage class
+
+we keep all the locators of the login screen in loginpage class and same we will
+do for all the classes
+
+constructor we use to initialize the object and the elements of the class
+we will call selenium page factory to initialize all the elements of the class
+and we call it in constructor
+
+class 6 -
+
+recap -
+data driven testing - when scripts execute against multiple sets of data we call it
+ddt.
+
+scenario outline we have to use to achieve ddt in cucumber with examples table
+
+hooks - background - scenario -
+
+hooks - in steps package, we write hooks class.
+@before - pre condition
+@after - post condition
+
+POM - page object model design pattern
+we create separate classes for separate screens of the application
+
+with the help of constructor, we initialize all the web elements
+
+class 7 -
+
+recap -
+data driven testing
+we can achieve ddt using excel file when the volume of data is big
+we can achieve ddt using data table
+we can achieve ddt using examples table
+
+data table vs examples table
+data table is specific for just one step. However, examples table is for complete
+scenario
+
+page initializer class - to create objects of the classes we need centralized class
+that's why we use page initializer which we call in common methods.
+
+reporting in framework -
+it gives us the complete information of the execution.
+
+for opening the html report in
+right click on the report -> open in -> browser -> chrome
+
+
+
+maven surefire plugin we use to create a single project entity
+from here we can execute all of our test cases
+
+we should focus on build success message for executing pom.xml file
+the way we added plugin in runnner class, we have to add plugin in pom.xml for reports
+
+class 8 -
+
+recap -
+
+reports - we get html reports, json report and maven cucumber report from our
+framework - All these type of reports is generated under target folder
+
+take screenshot method - cucumber accept array of byte for the screenshot
+Scenario class holds the complete status of the execution such as test case name,
+status etc.
+
+maven cucumber report plugin we used from pom.xml file to execute the test cases and
+generate the report from the pom.xml file
+
+assertion - whenever we write test cases, we need to validate the functionality of it
+in cucumber framework we use junit assertions to do the same.
